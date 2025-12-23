@@ -1,10 +1,17 @@
-﻿namespace dts_login_app.MAUI
+﻿using dts_login_app.MAUI.ViewModels;
+using dts_login_app.MAUI.Views;
+
+namespace dts_login_app.MAUI
 {
     public partial class AppShell : Shell
     {
         public AppShell()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            //this.BindingContext = new AppShellViewModel();
+            //Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+            //Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+            //Routing.RegisterRoute(nameof(ContactPage), typeof(ContactPage));
         }
     }
 }

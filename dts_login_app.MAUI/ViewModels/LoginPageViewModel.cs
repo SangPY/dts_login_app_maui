@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using dts_login_app.MAUI.Models;
 using dts_login_app.MAUI.Services;
+using dts_login_app.MAUI.UserControls;
+using dts_login_app.MAUI.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,51 +21,51 @@ namespace dts_login_app.MAUI.ViewModels
         [ObservableProperty]
         private string _password;
 
-        readonly ILoginService loginService = new LoginService();
+        ILoginService loginService = new LoginService();
 
-        //[RelayCommand]
-        //public async void Login()
-        //{
-        //    try
-        //    {
-        //        if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-        //        {
-        //            if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
-        //            {
-        //                User user = await loginService.Login(UserName, Password);
-        //                if (user == null)
-        //                {
-        //                    await Shell.Current.DisplayAlert("Error", "Username/Password is incorrect", "Ok");
-        //                    return;
-        //                }
-        //                if (Preferences.ContainsKey(nameof(App.user)))
-        //                {
-        //                    Preferences.Remove(nameof(App.user));
-        //                }
-        //                string userDetails = JsonConvert.SerializeObject(user);
-        //                Preferences.Set(nameof(App.user), userDetails);
-        //                App.user = user;
-        //                AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
-        //                await Shell.Current.GoToAsync(nameof(HomePage));
-        //            }
-        //            else
-        //            {
-        //                await Shell.Current.DisplayAlert("Error", "All fields required", "Ok");
-        //                return;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            await Shell.Current.DisplayAlert("Error", "No Internet Access", "Ok");
-        //            return;
-        //        }
+        [RelayCommand]
+        public async void Login()
+        {
+            try
+            {
+                if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                {
+                    if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
+                    {
+                        User user = await loginService.Login(UserName, Password);
+                        if (user == null)
+                        {
+                            await Shell.Current.DisplayAlert("Error", "Username/Password is incorrect", "Ok");
+                            return;
+                        }
+                        if (Preferences.ContainsKey(nameof(App.user)))
+                        {
+                            Preferences.Remove(nameof(App.user));
+                        }
+                        string userDetails = JsonConvert.SerializeObject(user);
+                        Preferences.Set(nameof(App.user), userDetails);
+                        App.user = user;
+                        AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                        await Shell.Current.GoToAsync(nameof(HomePage));
+                    }
+                    else
+                    {
+                        await Shell.Current.DisplayAlert("Error", "All fields required", "Ok");
+                        return;
+                    }
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "No Internet Access", "Ok");
+                    return;
+                }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await Shell.Current.DisplayAlert("Error", ex.Message, "Ok");
-        //        return;
-        //    }
-        //}
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "Ok");
+                return;
+            }
+        }
     }
 }

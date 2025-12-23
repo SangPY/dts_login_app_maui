@@ -7,12 +7,13 @@ namespace dts_login_app.MAUI
     public partial class App : Application
     {
         public static User user;
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
-            //MainPage = new NavigationPage(new LoginPage());
+            //MainPage = new AppShell();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         //protected override Window CreateWindow(IActivationState? activationState)

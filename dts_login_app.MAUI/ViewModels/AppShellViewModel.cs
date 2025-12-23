@@ -11,10 +11,10 @@ namespace dts_login_app.MAUI.ViewModels
         [RelayCommand]
         async void SignOut()
         {
-            //if (Preferences.ContainsKey(nameof(App.user)))
-            //{
-            //    Preferences.Remove(nameof(App.user));
-            //}
+            if (Preferences.ContainsKey(nameof(App.user)))
+            {
+                Preferences.Remove(nameof(App.user));
+            }
             await Shell.Current.GoToAsync("..");
         }
     }
