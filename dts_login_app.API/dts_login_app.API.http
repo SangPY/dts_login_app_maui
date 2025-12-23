@@ -1,0 +1,6 @@
+@dts_login_app.API_HostAddress = http://localhost:5200
+
+GET {{dts_login_app.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="dts_login_app.API/dts_login_app.API.csproj" />
+  <Project Path="dts_login_app.MAUI/dts_login_app.MAUI.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
