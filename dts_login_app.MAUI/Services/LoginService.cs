@@ -10,17 +10,24 @@ namespace dts_login_app.MAUI.Services
     {
         public async Task<User> Login(string email, string password)
         {
-            _ = new User();
-            var client = new HttpClient();
-            string url = "https://localhost:5000/api/User/" + email + "/" + password;
-            client.BaseAddress = new Uri(url);
-            HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                User user = await response.Content.ReadFromJsonAsync<User>();
-                return await Task.FromResult(user!);
+                var client = new HttpClient();
+                string localhostUrl = "https://localhost:7069/api/User/" + email + "/" + password;
+                client.BaseAddress = new Uri(localhostUrl);
+                HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
+                if (response.IsSuccessStatusCode)
+                {
+                    User user = await response.Content.ReadFromJsonAsync<User>();
+                    return await Task.FromResult(user!);
+                }
+                return null;
             }
-            return null!;
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+                return null;
+            }
         }
     }
 }

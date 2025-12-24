@@ -28,7 +28,7 @@ namespace dts_login_app.MAUI.ViewModels
         {
             try
             {
-                if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
                     {

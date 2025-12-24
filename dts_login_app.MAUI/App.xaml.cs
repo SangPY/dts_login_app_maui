@@ -12,8 +12,8 @@ namespace dts_login_app.MAUI
         {
             InitializeComponent();
 
-            //MainPage = new AppShell();
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new AppShell();
+            //MainPage = new NavigationPage(new LoginPage());
         }
 
         //protected override Window CreateWindow(IActivationState? activationState)
